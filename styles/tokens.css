@@ -1,0 +1,79 @@
+/* ========================================
+   DESIGN TOKENS — RemixHub
+   Sistema de diseño centralizado.
+   Todos los valores visuales de la app
+   se definen acá y se consumen vía
+   var(--token) en los componentes.
+   ======================================== */
+
+:root {
+  /* --- Paleta de colores --- */
+  --color-bg-primary: #07070A;
+  --color-bg-secondary: #0D0D14;
+  --color-bg-card: #111119;
+  --color-bg-card-hover: #16161F;
+
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
+
+  --color-text-primary: #F0F0F5;
+  --color-text-secondary: #8888A0;
+  --color-text-muted: #55556A;
+
+  --color-accent: #8B5CF6;
+  --color-accent-hover: #7C3AED;
+  --color-accent-glow: rgba(139, 92, 246, 0.15);
+  --color-accent-subtle: rgba(139, 92, 246, 0.06);
+
+  --color-pink: #EC4899;
+  --color-cyan: #06B6D4;
+  --color-amber: #FBBF24;
+  --color-green: #10B981;
+  --color-red: #F43F5E;
+
+  /* --- Tipografía --- */
+  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.75rem;   /* 28px */
+
+  /* --- Espaciado --- */
+  --space-1: 0.25rem;    /* 4px */
+  --space-2: 0.5rem;     /* 8px */
+  --space-3: 0.75rem;    /* 12px */
+  --space-4: 1rem;       /* 16px */
+  --space-5: 1.25rem;    /* 20px */
+  --space-6: 1.5rem;     /* 24px */
+  --space-8: 2rem;       /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+
+  /* --- Bordes --- */
+  --radius-sm: 0.5rem;   /* 8px */
+  --radius-md: 0.625rem; /* 10px */
+  --radius-lg: 0.875rem; /* 14px */
+  --radius-full: 9999px;
+
+  /* --- Capas (z-index) --- */
+  --z-base: 1;
+  --z-nav: 100;
+  --z-mobile-menu: 150;
+  --z-player: 200;
+  --z-toast: 300;
+
+  /* --- Transiciones --- */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* --- Layout --- */
+  --nav-height: 4rem;    /* 64px */
+  --player-height: 4.5rem; /* 72px */
+  --content-max-width: 75rem; /* 1200px */
+}

@@ -1,0 +1,103 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  padding: 0 var(--space-8);
+  background-color: rgba(7, 7, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+  font-weight: 800;
+  font-size: var(--text-xl);
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #8B5CF6, #EC4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.links {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.link {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-base);
+}
+
+.link:hover {
+  color: var(--color-text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.linkActive {
+  color: var(--color-text-primary);
+  background-color: var(--color-accent-glow);
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 14rem;
+  padding: var(--space-2) var(--space-4) var(--space-2) 2.25rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background-color: rgba(255, 255, 255, 0.03);
+  font-size: var(--text-xs);
+  outline: none;
+  transition: all var(--transition-slow);
+}
+
+.searchInput:focus {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+  width: 17.5rem;
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.hamburger {
+  display: none;
+  font-size: 1.375rem;
+  padding: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 var(--space-4);
+  }
+
+  .links,
+  .search {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
