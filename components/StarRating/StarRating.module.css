@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: var(--text-sm);
+  line-height: 1;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  cursor: default;
+  user-select: none;
+}
+
+.star.filled {
+  color: #FBBF24;
+}
+
+.star.interactive {
+  cursor: pointer;
+}
+
+.star.interactive:hover,
+.star.interactive.hovered {
+  transform: scale(1.25);
+}
