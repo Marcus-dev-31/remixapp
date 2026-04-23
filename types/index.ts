@@ -2,21 +2,24 @@ export interface Track {
   id: string;
   title: string;
   artist: string;
+  artistId: string;
+  artistSlug: string;
   genre: string;
   bpm: number;
   duration: string;
   plays: number;
   rating: number;
   ratingCount: number;
-  coverEmoji: string;
+  cover: string;
   waveColor: string;
 }
 
 export interface Creator {
+  id: string;
   name: string;
   slug: string;
   tracks: number;
   followers: number;
-  avatarEmoji: string;
+  avatar: string;
   accent: string;
 }
