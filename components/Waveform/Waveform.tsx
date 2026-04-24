@@ -20,7 +20,7 @@ export default function Waveform({
       const wave = Math.sin(i * 0.4) * 0.5;
       const detail = Math.abs(Math.sin(i * 1.7)) * 0.5;
       const maxH = small ? 24 : 36;
-      return Math.max(3, (wave + detail) * maxH);
+      return Math.round(Math.max(3, (wave + detail) * maxH) * 100) / 100;
     });
   }, [bars, small]);
 
@@ -40,14 +40,12 @@ export default function Waveform({
           <rect
             key={i}
             x={i * 4}
-            y={height / 2 - barHeight / 2}
+            y={Math.round((height / 2 - barHeight / 2) * 100) / 100}
             width={2.2}
             height={barHeight}
             rx={1.1}
             fill={fill}
-            style={{
-              transition: 'fill 0.3s ease',
-            }}
+            style={{ transition: 'fill 0.3s ease' }}
           />
         );
       })}
