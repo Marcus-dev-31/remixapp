@@ -12,6 +12,7 @@ export interface Track {
   ratingCount: number;
   cover: string;
   waveColor: string;
+  fileUrl?: string
 }
 
 export interface Creator {
