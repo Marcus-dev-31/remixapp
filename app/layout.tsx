@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Outfit, JetBrains_Mono } from 'next/font/google';
 import Header from '@/components/Header/Header';
+import { PlayerProvider } from '@/context/PlayerContext';
+import { ToastProvider } from '@/context/ToastContext';
 import '../styles/globals.css';
 
 const outfit = Outfit({
@@ -28,8 +30,12 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
       <body>
-        <Header />
-        {children}
+        <PlayerProvider>
+          <ToastProvider>
+            <Header />
+            {children}
+          </ToastProvider>
+        </PlayerProvider>
       </body>
     </html>
   );
