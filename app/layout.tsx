@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
+    <html lang="es" data-scroll-behavior="smooth" className={`${outfit.variable} ${jetbrainsMono.variable}`}>
       <body>
         <PlayerProvider>
           <ToastProvider>
