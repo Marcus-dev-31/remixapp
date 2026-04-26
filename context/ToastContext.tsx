@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import Toast from '@/components/Toast/Toast';
+import { motion, AnimatePresence } from "framer-motion";
+import Toast from "@/components/Toast/Toast";
 import {
   createContext,
   useContext,
@@ -8,7 +9,7 @@ import {
   useCallback,
   useRef,
   type ReactNode,
-} from 'react';
+} from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -28,7 +29,10 @@ const ToastContext = createContext<ToastContextValue | null>(null);
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
 export function ToastProvider({ children }: { children: ReactNode }) {
-  const [toast, setToast] = useState<ToastState>({ message: '', visible: false });
+  const [toast, setToast] = useState<ToastState>({
+    message: "",
+    visible: false,
+  });
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showToast = useCallback((message: string) => {
@@ -39,7 +43,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     setToast({ message, visible: true });
 
     timerRef.current = setTimeout(() => {
-      setToast({ message: '', visible: false });
+      setToast({ message: "", visible: false });
       timerRef.current = null;
     }, 2500);
   }, []);
@@ -47,7 +51,9 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      {toast.visible && <ToastRenderer message={toast.message} />}
+      <AnimatePresence mode="wait">
+        {toast.visible && <ToastRenderer message={toast.message} />}
+      </AnimatePresence>
     </ToastContext.Provider>
   );
 }
@@ -60,10 +66,10 @@ function ToastRenderer({ message }: { message: string }) {
       role="status"
       aria-live="polite"
       style={{
-        position: 'fixed',
-        bottom: '88px',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        position: "fixed",
+        bottom: "88px",
+        left: "50%",
+        transform: "translateX(-50%)",
         zIndex: 300,
       }}
     >
@@ -76,6 +82,6 @@ function ToastRenderer({ message }: { message: string }) {
 
 export function useToast(): ToastContextValue {
   const ctx = useContext(ToastContext);
-  if (!ctx) throw new Error('useToast must be used inside <ToastProvider>');
+  if (!ctx) throw new Error("useToast must be used inside <ToastProvider>");
   return ctx;
 }

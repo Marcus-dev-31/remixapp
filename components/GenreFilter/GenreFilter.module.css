@@ -11,6 +11,8 @@
 }
 
 .pill {
+  position: relative;
+  overflow: hidden;
   padding: 7px 18px;
   border-radius: 99px;
   border: 1px solid var(--color-border);
@@ -20,7 +22,6 @@
   font-size: var(--text-sm);
   font-weight: 500;
   cursor: pointer;
-  transition: all var(--transition-fast);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -31,7 +32,14 @@
 }
 
 .pill.active {
-  background: var(--color-accent);
   border-color: var(--color-accent);
   color: white;
+}
+
+.activeIndicator {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-accent);
+  z-index: 0;
 }

@@ -1,9 +1,4 @@
 .toast {
-  position: fixed;
-  bottom: 88px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: var(--z-toast);
   padding: 10px 20px;
   border-radius: 99px;
   background: rgba(30, 30, 45, 0.95);
@@ -13,7 +8,6 @@
   font-size: var(--text-sm);
   font-weight: 500;
   white-space: nowrap;
-  animation: toastIn 0.3s ease both;
   pointer-events: none;
 }
 

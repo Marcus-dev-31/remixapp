@@ -12,10 +12,11 @@ export default function CreatorsPage() {
         </p>
       </section>
       <div className={styles.grid}>
-        {CREATORS.map((creator) => (
+        {CREATORS.map((creator, index) => (
           <CreatorCard
             key={creator.name}
             creator={creator}
+            index={index}
           />
         ))}
       </div>

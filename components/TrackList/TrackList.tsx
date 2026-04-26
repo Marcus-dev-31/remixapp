@@ -51,9 +51,10 @@ export default function TrackList({
 
   return (
     <div className={styles.list}>
-      {tracks.map((track) => (
+      {tracks.map((track, index) => (
         <TrackRow
           key={track.id}
+          index={index}
           track={track}
           playing={state.currentTrack?.id === track.id && state.isPlaying}
           onPlay={handlePlay}

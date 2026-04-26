@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import type { Track, Creator } from '@/types';
 import Waveform from '@/components/Waveform/Waveform';
 import StarRating from '@/components/StarRating/StarRating';
@@ -8,6 +9,7 @@ import styles from './TrackRow.module.css';
 interface TrackRowProps {
   track: Track;
   playing: boolean;
+  index: number;
   onPlay: (id: string) => void;
   onDownload: (track: Track) => void;
   onRating: (id: string, score: number) => void;
@@ -19,6 +21,7 @@ interface TrackRowProps {
 export default function TrackRow({
   track,
   playing,
+  index,
   onPlay,
   onDownload,
   onRating,
@@ -27,15 +30,28 @@ export default function TrackRow({
   onArtistClick,
 }: TrackRowProps) {
   return (
-    <div
+    <motion.div
       className={[styles.row, playing ? styles.playing : ''].filter(Boolean).join(' ')}
       onClick={() => onPlay(track.id)}
+      initial={{ opacity: 0, x: -32 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{
+        duration: 0.45,
+        delay: index * 0.06,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{ x: 6, transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] } }}
+      whileTap={{ scale: 0.98 }}
     >
-      <div className={styles.cover}>
+      <motion.div
+        className={styles.cover}
+        animate={playing ? { scale: [1, 1.08, 1] } : { scale: 1 }}
+        transition={playing ? { duration: 1.8, repeat: Infinity, ease: 'easeInOut' } : {}}
+      >
         <div className={styles.coverBg} style={{ background: track.waveColor }} />
         <span className={styles.coverEmoji}>{track.cover}</span>
         <div className={styles.playOverlay}>{playing ? '⏸' : '▶'}</div>
-      </div>
+      </motion.div>
 
       <div className={styles.info}>
         <div className={styles.title}>{track.title}</div>
@@ -44,7 +60,7 @@ export default function TrackRow({
             className={styles.artistLink}
             onClick={(e) => {
               e.stopPropagation();
-              onArtistClick?.({ 
+              onArtistClick?.({
                 id: track.artistId,
                 name: track.artist,
                 slug: track.artistSlug,
@@ -73,16 +89,19 @@ export default function TrackRow({
         <StarRating rating={rating} size={13} />
       </div>
 
-      <button
+      <motion.button
         className={[styles.downloadBtn, downloaded ? styles.downloaded : ''].filter(Boolean).join(' ')}
         onClick={(e) => {
           e.stopPropagation();
           onDownload(track);
         }}
         aria-label={`Descargar ${track.title}`}
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 15 }}
       >
         {downloaded ? '✓' : '↓'}
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   );
 }

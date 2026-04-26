@@ -19,10 +19,6 @@ export default function MobileMenu({
 }: MobileMenuProps) {
   const pathname = usePathname();
 
-  const handleNavClick = () => {
-    onClose();
-  };
-
   return (
     <div
       className={`${styles.overlay} ${isOpen ? styles.open : ""}`}
@@ -40,7 +36,7 @@ export default function MobileMenu({
       <Link
         href="/"
         className={`${styles.link} ${pathname === "/" ? styles.linkActive : ""}`}
-        onClick={handleNavClick}
+        onClick={onClose}
       >
         Explorar
       </Link>
@@ -48,7 +44,7 @@ export default function MobileMenu({
       <Link
         href="/creators"
         className={`${styles.link} ${pathname.startsWith("/creators") ? styles.linkActive : ""}`}
-        onClick={handleNavClick}
+        onClick={onClose}
       >
         Creadores
       </Link>
