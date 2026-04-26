@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import type { Track, Creator } from "@/types";
+import { useState } from "react";
+import { usePlayer } from "@/context/PlayerContext";
+import { useToast } from "@/context/ToastContext";
 import TrackRow from "@/components/TrackRow/TrackRow";
 import styles from "./TrackList.module.css";
 
@@ -16,21 +18,31 @@ export default function TrackList({
   onArtistClick,
   emptyMessage = "No hay tracks para mostrar",
 }: TrackListProps) {
-    
-  const [playing, setPlaying] = useState<string | null>(null);
+  const { state, playTrack, togglePause } = usePlayer();
+  const { showToast } = useToast();
+
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [downloaded, setDownloaded] = useState<Record<string, boolean>>({});
 
   const handlePlay = (id: string) => {
-    setPlaying((prev) => (prev === id ? null : id));
+    const track = tracks.find((t) => t.id === id);
+    if (!track) return;
+
+    if (state.currentTrack?.id === id) {
+      togglePause();
+    } else {
+      playTrack(track);
+    }
   };
 
   const handleDownload = (track: Track) => {
     setDownloaded((prev) => ({ ...prev, [track.id]: true }));
+    showToast(`Descargando "${track.title}"...`);
   };
 
   const handleRating = (id: string, score: number) => {
     setRatings((prev) => ({ ...prev, [id]: score }));
+    showToast(`Calificaste con ${score} ★`);
   };
 
   if (tracks.length === 0) {
@@ -43,7 +55,7 @@ export default function TrackList({
         <TrackRow
           key={track.id}
           track={track}
-          playing={playing === track.id}
+          playing={state.currentTrack?.id === track.id && state.isPlaying}
           onPlay={handlePlay}
           onDownload={handleDownload}
           onRating={handleRating}

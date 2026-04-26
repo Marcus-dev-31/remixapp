@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Outfit, JetBrains_Mono } from 'next/font/google';
 import Header from '@/components/Header/Header';
+import NowPlayingBar from '@/components/NowPlayingBar/NowPlayingBar';
 import { PlayerProvider } from '@/context/PlayerContext';
 import { ToastProvider } from '@/context/ToastContext';
 import '../styles/globals.css';
@@ -34,6 +35,7 @@ export default function RootLayout({
           <ToastProvider>
             <Header />
             {children}
+            <NowPlayingBar />
           </ToastProvider>
         </PlayerProvider>
       </body>

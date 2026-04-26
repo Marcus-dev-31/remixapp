@@ -1,23 +1,26 @@
-'use client';
+"use client";
 
-import type { Track } from '@/types';
-import Waveform from '@/components/Waveform/Waveform';
-import StarRating from '@/components/StarRating/StarRating';
-import styles from './NowPlayingBar.module.css';
+import { usePlayer } from "@/context/PlayerContext";
+import { useToast } from "@/context/ToastContext";
+import { useState } from "react";
+import Waveform from "@/components/Waveform/Waveform";
+import StarRating from "@/components/StarRating/StarRating";
+import styles from "./NowPlayingBar.module.css";
 
-interface NowPlayingBarProps {
-  track: Track;
-  rating: number;
-  onStop: () => void;
-  onRating: (id: string, score: number) => void;
-}
+export default function NowPlayingBar() {
+  const { state, togglePause, stop } = usePlayer();
+  const { showToast } = useToast();
+  const [ratings, setRatings] = useState<Record<string, number>>({});
 
-export default function NowPlayingBar({
-  track,
-  rating,
-  onStop,
-  onRating,
-}: NowPlayingBarProps) {
+  if (!state.currentTrack) return null;
+
+  const track = state.currentTrack;
+  const rating = ratings[track.id] ?? track.rating;
+
+  const handleRating = (score: number) => {
+    setRatings((prev) => ({ ...prev, [track.id]: score }));
+    showToast(`Calificaste con ${score} ★`);
+  };
   return (
     <div className={styles.bar}>
       <div
@@ -37,22 +40,26 @@ export default function NowPlayingBar({
       </div>
 
       <div className={styles.controls}>
-        <button className={styles.btn} aria-label="Track anterior">⏮</button>
+        <button className={styles.btn} aria-label="Track anterior">
+          ⏮
+        </button>
         <button
           className={`${styles.btn} ${styles.btnMain}`}
-          onClick={onStop}
-          aria-label="Pausar"
+          onClick={togglePause}
+          aria-label={state.isPlaying ? 'Pausar' : 'Reproducir'}
         >
-          ⏸
+          {state.isPlaying ? '⏸' : '▶'}
         </button>
-        <button className={styles.btn} aria-label="Track siguiente">⏭</button>
+        <button className={styles.btn} aria-label="Track siguiente">
+          ⏭
+        </button>
       </div>
 
       <div className={styles.rating}>
         <StarRating
           rating={rating}
           interactive
-          onRate={(score) => onRating(track.id, score)}
+          onRate={handleRating}
           size={18}
         />
       </div>

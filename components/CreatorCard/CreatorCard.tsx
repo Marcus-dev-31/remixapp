@@ -23,7 +23,7 @@ export default function CreatorCard({ creator, onClick }: CreatorCardProps) {
         <div className={styles.name}>{creator.name}</div>
         <div className={styles.stats}>
           <span>{creator.tracks} tracks</span>
-          <span>{creator.followers.toLocaleString()} seguidores</span>
+          <span>{creator.followers.toLocaleString('es-AR')} seguidores</span>
         </div>
       </div>
     </Link>
