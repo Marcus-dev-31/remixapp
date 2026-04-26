@@ -10,9 +10,11 @@ export interface Track {
   plays: number;
   rating: number;
   ratingCount: number;
+  downloads: number;
   cover: string;
   waveColor: string;
-  fileUrl?: string
+  fileUrl?: string;
+  uploadedAt: string;
 }
 
 export interface Creator {
@@ -23,4 +25,10 @@ export interface Creator {
   followers: number;
   avatar: string;
   accent: string;
+  bio: string;
+  totalPlays: number;
+  email?: string;
+  instagram?: string;
+  youtube?: string;
+  website?: string;
 }

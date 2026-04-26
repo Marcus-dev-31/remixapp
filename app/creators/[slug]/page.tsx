@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { CREATORS, TRACKS } from '@/lib/mock-data';
-import TrackList from '@/components/TrackList/TrackList';
+import CreatorProfile from '@/components/CreatorProfile/CreatorProfile';
 import styles from './page.module.css';
 
 interface CreatorPageProps {
@@ -18,37 +18,39 @@ export default async function CreatorPage({ params }: CreatorPageProps) {
   if (!creator) notFound();
 
   const creatorTracks = TRACKS.filter((t) => t.artistSlug === slug);
+  const creatorGenres = [...new Set(creatorTracks.map((t) => t.genre))];
+
+  const mostPlayed = creatorTracks.reduce<typeof creatorTracks[0] | null>(
+    (acc, t) => (!acc || t.plays > acc.plays ? t : acc),
+    null
+  );
+
+  const avgRating = creatorTracks.length
+    ? (creatorTracks.reduce((acc, t) => acc + t.rating, 0) / creatorTracks.length).toFixed(1)
+    : '—';
+
+  const totalDownloads = creatorTracks.reduce((acc, t) => acc + t.downloads, 0);
+  const totalRatingVotes = creatorTracks.reduce((acc, t) => acc + t.ratingCount, 0);
+
+  const contacts = [
+    creator.email && { key: 'email', icon: '✉', label: creator.email, href: `mailto:${creator.email}` },
+    creator.instagram && { key: 'instagram', icon: '📸', label: `@${creator.instagram}`, href: `https://instagram.com/${creator.instagram}` },
+    creator.youtube && { key: 'youtube', icon: '▶', label: creator.youtube, href: `https://youtube.com/@${creator.youtube}` },
+    creator.website && { key: 'website', icon: '🔗', label: creator.website.replace('https://', ''), href: creator.website },
+  ].filter(Boolean) as { key: string; icon: string; label: string; href: string }[];
 
   return (
     <main className={styles.main}>
-      <div className={styles.accent} style={{ background: creator.accent }} />
-      <section className={styles.header}>
-        <div
-          className={styles.avatar}
-          style={{ background: `${creator.accent}18` }}
-        >
-          {creator.avatar}
-        </div>
-        <div className={styles.info}>
-          <h1 className={styles.name}>{creator.name}</h1>
-          <p className={styles.role}>Productor musical · Remixer</p>
-          <div className={styles.stats}>
-            <span className={styles.stat}>
-              <strong>{creator.tracks}</strong> tracks
-            </span>
-            <span className={styles.stat}>
-              <strong>{creator.followers.toLocaleString()}</strong> seguidores
-            </span>
-          </div>
-        </div>
-      </section>
-      <section>
-        <h2 className={styles.sectionTitle}>Tracks</h2>
-        <TrackList
-          tracks={creatorTracks}
-          emptyMessage="Este creador aún no tiene tracks"
-        />
-      </section>
+      <CreatorProfile
+        creator={creator}
+        creatorTracks={creatorTracks}
+        creatorGenres={creatorGenres}
+        contacts={contacts}
+        mostPlayed={mostPlayed}
+        avgRating={avgRating}
+        totalDownloads={totalDownloads}
+        totalRatingVotes={totalRatingVotes}
+      />
     </main>
   );
 }

@@ -1,14 +1,182 @@
 .main {
   max-width: 75rem;
   margin: 0 auto;
-  padding: 1.5rem 1rem 5rem;
+  padding: 0 1rem 5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   position: relative;
 }
 
-.accent {
+.banner {
+  position: absolute;
+  top: 0;
+  left: -1rem;
+  right: -1rem;
+  height: 280px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 0 1rem;
+  gap: 1.5rem;
+}
+
+.avatarWrapper {
+  position: relative;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.heroInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.name {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.bio {
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.heroStats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.heroStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.heroStat strong {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+}
+
+.heroStat span {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contacto */
+.contactBar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.contactLink:hover {
+  color: var(--color-text-primary);
+  background: var(--color-bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.contactIcon {
+  font-size: 0.875rem;
+}
+
+/* Secciones */
+.section {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+/* Géneros */
+.genrePills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.genrePill {
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* Estadísticas */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.statCard {
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCardBar {
   position: absolute;
   top: 0;
   left: 0;
@@ -16,85 +184,84 @@
   height: 3px;
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1rem;
-  padding: 2rem 0 1rem;
+.statCardLabel {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
 }
 
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  flex-shrink: 0;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.name {
-  font-size: 1.75rem;
-  font-weight: 800;
+.statCardValue {
+  font-size: 2rem;
+  font-weight: 900;
   letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.25rem;
 }
 
-.role {
-  color: var(--color-text-secondary);
-  font-size: 0.875rem;
-  font-weight: 300;
+.statCardValueSm {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: var(--color-text-primary);
 }
 
-.stats {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  margin-top: 0.5rem;
-}
-
-.stat {
+.statCardSub {
   font-size: 0.8125rem;
   color: var(--color-text-muted);
 }
 
-.stat strong {
-  color: var(--color-text-primary);
-  font-weight: 600;
-}
-
-.sectionTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
+.statCardStar {
+  font-size: 1rem;
+  opacity: 0.7;
 }
 
 @media (min-width: 768px) {
   .main {
-    padding: 2rem 1.5rem 5rem;
+    padding: 0 1.5rem 5rem;
   }
 
-  .header {
+  .banner {
+    left: -1.5rem;
+    right: -1.5rem;
+    height: 320px;
+  }
+
+  .hero {
     flex-direction: row;
     text-align: left;
-    align-items: center;
-    padding: 2.5rem 0 1.5rem;
+    align-items: flex-start;
+    padding: 3.5rem 0 1.5rem;
   }
 
-  .stats {
+  .heroInfo {
+    align-items: flex-start;
+  }
+
+  .heroStats {
     justify-content: flex-start;
   }
 
+  .bio {
+    margin: 0;
+  }
+
+  .contactBar {
+    justify-content: flex-start;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .name {
-    font-size: 2rem;
+    font-size: 2.5rem;
+  }
+
+  .avatar {
+    width: 112px;
+    height: 112px;
+    font-size: 3.5rem;
   }
 }
