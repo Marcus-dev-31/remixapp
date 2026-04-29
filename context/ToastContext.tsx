@@ -11,7 +11,7 @@ import {
   type ReactNode,
 } from "react";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+//Types 
 
 interface ToastState {
   message: string;
@@ -22,11 +22,11 @@ interface ToastContextValue {
   showToast: (message: string) => void;
 }
 
-// ─── Context ──────────────────────────────────────────────────────────────────
+//Context
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
-// ─── Provider ─────────────────────────────────────────────────────────────────
+//Provider
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toast, setToast] = useState<ToastState>({
@@ -58,7 +58,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// ─── Internal renderer ────────────────────────────────────────────────────────
+//Internal renderer
 
 function ToastRenderer({ message }: { message: string }) {
   return (
@@ -78,8 +78,7 @@ function ToastRenderer({ message }: { message: string }) {
   );
 }
 
-// ─── Hook ─────────────────────────────────────────────────────────────────────
-
+//Hook
 export function useToast(): ToastContextValue {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error("useToast must be used inside <ToastProvider>");

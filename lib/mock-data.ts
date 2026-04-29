@@ -16,7 +16,7 @@ export const TRACKS: Track[] = [
     downloads: 342,
     cover: '🌙',
     waveColor: '#8B5CF6',
-    uploadedAt: '2024-12-01',
+    uploadedAt: '2026-04-27',
   },
   {
     id: '2',
@@ -33,7 +33,7 @@ export const TRACKS: Track[] = [
     downloads: 198,
     cover: '⚡',
     waveColor: '#EC4899',
-    uploadedAt: '2024-11-15',
+    uploadedAt: '2026-04-27',
   },
   {
     id: '3',
@@ -50,7 +50,7 @@ export const TRACKS: Track[] = [
     downloads: 521,
     cover: '🔊',
     waveColor: '#06B6D4',
-    uploadedAt: '2025-01-08',
+    uploadedAt: '2026-04-27',
   },
   {
     id: '4',
@@ -67,7 +67,7 @@ export const TRACKS: Track[] = [
     downloads: 489,
     cover: '🗼',
     waveColor: '#F59E0B',
-    uploadedAt: '2024-10-20',
+    uploadedAt: '2026-04-27',
   },
   {
     id: '5',
@@ -84,7 +84,7 @@ export const TRACKS: Track[] = [
     downloads: 167,
     cover: '🎭',
     waveColor: '#10B981',
-    uploadedAt: '2024-09-03',
+    uploadedAt: '2026-04-25',
   },
   {
     id: '6',
@@ -101,7 +101,7 @@ export const TRACKS: Track[] = [
     downloads: 143,
     cover: '💎',
     waveColor: '#F43F5E',
-    uploadedAt: '2025-01-20',
+    uploadedAt: '2026-04-25',
   },
 ];
 

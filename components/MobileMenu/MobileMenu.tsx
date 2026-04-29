@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useNovedades } from "@/context/NovedadesContext";
 import styles from "./MobileMenu.module.css";
 
 interface MobileMenuProps {
@@ -18,6 +20,7 @@ export default function MobileMenu({
   searchQuery,
 }: MobileMenuProps) {
   const pathname = usePathname();
+  const { hasNewTracks } = useNovedades();
 
   return (
     <div
@@ -47,6 +50,28 @@ export default function MobileMenu({
         onClick={onClose}
       >
         Creadores
+      </Link>
+
+      <Link
+        href="/novedades"
+        className={`${styles.link} ${pathname === "/novedades" ? styles.linkActive : ""}`}
+        onClick={onClose}
+      >
+        Novedades
+        {hasNewTracks && (
+          <motion.span
+            className={styles.glowDot}
+            animate={{
+              boxShadow: [
+                '0 0 4px 2px #06B6D4',
+                '0 0 10px 4px #06B6D4',
+                '0 0 4px 2px #06B6D4',
+              ],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        )}
       </Link>
 
       <div className={styles.searchWrapper}>

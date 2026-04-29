@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useNovedades } from "@/context/NovedadesContext";
 import styles from "./NavBar.module.css";
 
 interface NavbarProps {
@@ -16,6 +18,7 @@ export default function Navbar({
   searchQuery,
 }: NavbarProps) {
   const pathname = usePathname();
+  const { hasNewTracks } = useNovedades();
 
   return (
     <nav className={styles.nav}>
@@ -43,6 +46,30 @@ export default function Navbar({
           }
         >
           Creadores
+        </Link>
+        <Link
+          href="/novedades"
+          className={
+            pathname === "/novedades"
+              ? `${styles.link} ${styles.linkActive}`
+              : styles.link
+          }
+        >
+          Novedades
+          {hasNewTracks && (
+            <motion.span
+              className={styles.glowDot}
+              animate={{
+                boxShadow: [
+                  '0 0 4px 2px #06B6D4',
+                  '0 0 10px 4px #06B6D4',
+                  '0 0 4px 2px #06B6D4',
+                ],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          )}
         </Link>
       </div>
 

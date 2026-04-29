@@ -5,6 +5,7 @@ import NowPlayingBar from "@/components/NowPlayingBar/NowPlayingBar";
 import PageTransition from "@/components/PageTransition/PageTransition";
 import { PlayerProvider } from "@/context/PlayerContext";
 import { ToastProvider } from "@/context/ToastContext";
+import { NovedadesProvider } from "@/context/NovedadesContext";
 import "../styles/globals.css";
 
 const outfit = Outfit({
@@ -37,13 +38,15 @@ export default function RootLayout({
       className={`${outfit.variable} ${jetbrainsMono.variable}`}
     >
       <body>
-        <PlayerProvider>
-          <ToastProvider>
-            <Header />
-            <PageTransition>{children}</PageTransition>
-            <NowPlayingBar />
-          </ToastProvider>
-        </PlayerProvider>
+        <NovedadesProvider>
+          <PlayerProvider>
+            <ToastProvider>
+              <Header />
+              <PageTransition>{children}</PageTransition>
+              <NowPlayingBar />
+            </ToastProvider>
+          </PlayerProvider>
+        </NovedadesProvider>
       </body>
     </html>
   );
