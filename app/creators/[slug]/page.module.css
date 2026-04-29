@@ -265,3 +265,21 @@
     font-size: 3.5rem;
   }
 }
+
+.followBtn {
+  padding: 0.625rem 1.5rem;
+  border-radius: 9999px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: opacity var(--transition-base);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.followBtn:hover {
+  opacity: 0.9;
+}

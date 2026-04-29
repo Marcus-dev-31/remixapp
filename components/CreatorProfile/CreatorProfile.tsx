@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion, type Variants } from 'framer-motion';
 import type { Track, Creator } from '@/types';
 import TrackList from '@/components/TrackList/TrackList';
@@ -34,7 +35,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1,
@@ -53,6 +54,19 @@ export default function CreatorProfile({
   totalDownloads,
   totalRatingVotes,
 }: CreatorProfileProps) {
+  const [following, setFollowing] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem(`remixhub_following_${creator.id}`);
+    setFollowing(stored === 'true');
+  }, [creator.id]);
+
+  const handleFollow = () => {
+    const next = !following;
+    setFollowing(next);
+    localStorage.setItem(`remixhub_following_${creator.id}`, String(next));
+  };
+
   return (
     <motion.div
       variants={containerVariants}
@@ -133,6 +147,18 @@ export default function CreatorProfile({
               <span>Reproducciones</span>
             </div>
           </motion.div>
+          <motion.button
+            className={styles.followBtn}
+            onClick={handleFollow}
+            style={!following ? { background: creator.accent } : {}}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.45, ease }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {following ? 'Siguiendo ✓' : 'Seguir'}
+          </motion.button>
         </div>
       </motion.section>
 
